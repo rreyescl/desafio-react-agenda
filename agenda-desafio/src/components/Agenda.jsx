@@ -25,8 +25,7 @@ export default function Agenda(){
                 setUsers(data);
                 setFilteredUsers(data);
             } catch (error) {
-                openErrorNotification('Hubo un error al cargar los datos.');
-               // openErrorNotification('Error fetching users:'+ error);
+                openErrorNotification('Hubo un error al cargar los datos.');               
                 console.error('Error fetching users:', error);
             }
         };
@@ -57,23 +56,18 @@ export default function Agenda(){
     // Agregar nuevo contacto a la API
     const handleAddContact = async () => {
         if (newContact.name && newContact.description && newContact.photo) {
-           
             try {
-                const newUser = await addUser(newContact);
-                
-                setUsers([...users, newUser]); // Actualizar la lista de usuarios con el nuevo contacto
-                setNewContact({ name: '', description: '', photo: '' }); // Resetear formulario
-                setFilteredUsers([...users, newContact]);
+                const newUser = await addUser(newContact); // El servidor debe devolver el usuario con el 'id'
+                setUsers((prevUsers) => [...prevUsers, newUser]); // Usa el objeto devuelto para incluir el 'id'
+                setFilteredUsers((prevUsers) => [...prevUsers, newUser]);
+                setNewContact({ name: '', description: '', photo: '' });
                 openSuccessNotification('Contacto agregado con éxito');
-                setIsDrawerOpen(false); // Cerrar el Drawer
-               
+                setIsDrawerOpen(false);
             } catch (error) {
                 openErrorNotification('Hubo un error al agregar contacto.');
                 console.error('Error adding contact:', error);
-                //alert('Hubo un error al agregar el contacto.');
             }
         } else {
-            //alert('Por favor complete todos los campos antes de agregar.');
             openErrorNotification('Por favor complete todos los campos antes de agregar.');
         }
     };
@@ -97,14 +91,7 @@ export default function Agenda(){
         setNewContact({ name: '', description: '', photo: '' }); // Resetear formulario       
         setIsDrawerOpen(false); // Cerrar el Drawer
     };
-/*
-    const openErrorNotification = (message) => {
-        notification.error({
-            message: 'Error',
-            description: message,
-            duration: 2,
-        });
-    };*/
+
 
     const confirmClick= (user) => {
 
