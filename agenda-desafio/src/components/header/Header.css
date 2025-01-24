@@ -1,0 +1,20 @@
+.custom-header {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    background-color: #ffffff;
+    color: white;
+    padding: 0 20px;
+    height: 64px; /* Asegúrate de definir una altura específica si no viene por defecto */
+  }
+  
+  .custom-header__logo {
+    display: flex;
+    align-items: center; /* Centra verticalmente dentro del contenedor */
+    justify-content: center; /* Centra horizontalmente dentro del contenedor */
+  }
+  
+  .custom-header__logo img {
+    height: 50px; /* Ajusta según sea necesario */
+  }
+  
